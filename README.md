@@ -1,0 +1,2 @@
+# OldAnimationsModUnresponsiveFix
+修复在国内使用OldAnimationsMod by SpiderFrog时加载时间过长的问题
