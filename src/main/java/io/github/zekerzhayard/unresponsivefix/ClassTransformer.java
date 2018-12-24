@@ -3,6 +3,7 @@ package io.github.zekerzhayard.unresponsivefix;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -14,23 +15,42 @@ public class ClassTransformer implements IClassTransformer {
 		if (transformedName.equals("com.spiderfrog.oldanimations.cosmetic.LoadCosmeticData")) {
 			System.out.println("Found the class: " + transformedName);
 			ClassReader classReader = new ClassReader(basicClass);
-            ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+            ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS);
             classReader.accept(new ClassVisitor(Opcodes.ASM5, classWriter) {
             	@Override
                 public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
             		MethodVisitor methodVisitor = super.visitMethod(access, name, desc, signature, exceptions);
             		if (name.equals("onLoadCosmetics") && desc.equals("()V")) {
             			System.out.println("Found the method: " + name);
-            			methodVisitor.visitCode();
-            			methodVisitor.visitVarInsn(Opcodes.ALOAD, 0);
-            			methodVisitor.visitMethodInsn(Opcodes.INVOKESTATIC, "io/github/zekerzhayard/unresponsivefix/LoadCosmeticDataHandler", "onLoadCosmetics", "(Lcom/spiderfrog/oldanimations/cosmetic/LoadCosmeticData;)V", false);
-            			methodVisitor.visitInsn(Opcodes.RETURN);
-            			methodVisitor.visitEnd();
-            			return new MethodVisitor(Opcodes.ASM5) {};
+            			return new MethodVisitor(Opcodes.ASM5, methodVisitor) {
+            			    private boolean isFirst = true;
+            			    
+            			    @Override
+            			    public void visitVarInsn(int opcode, int var) {
+            			        if (this.mv == null) {
+            			            return;
+            			        }
+            			        if (this.isFirst && opcode == Opcodes.ALOAD && var == 0) {
+            			            this.isFirst = false;
+            			            Label label = new Label();
+            			            mv.visitFieldInsn(Opcodes.GETSTATIC, "io/github/zekerzhayard/unresponsivefix/LoadingThread", "isFirst", "Z");
+            			            mv.visitJumpInsn(Opcodes.IFEQ, label);
+            			            mv.visitInsn(Opcodes.ICONST_0);
+            			            mv.visitFieldInsn(Opcodes.PUTSTATIC, "io/github/zekerzhayard/unresponsivefix/LoadingThread", "isFirst", "Z");
+            			            mv.visitTypeInsn(Opcodes.NEW, "io/github/zekerzhayard/unresponsivefix/LoadingThread");
+            			            mv.visitInsn(Opcodes.DUP);
+            			            mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "io/github/zekerzhayard/unresponsivefix/LoadingThread", "<init>", "()V", false);
+            			            mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "io/github/zekerzhayard/unresponsivefix/LoadingThread", "start", "()V", false);
+            			            mv.visitInsn(Opcodes.RETURN);
+            			            mv.visitLabel(label);
+            			        }
+            			        mv.visitVarInsn(opcode, var);
+            			    }
+                        };
             		}
             		return methodVisitor;
             	}
-            }, ClassReader.SKIP_FRAMES);
+            }, ClassReader.EXPAND_FRAMES);
             return classWriter.toByteArray();
 		}
 		return basicClass;
