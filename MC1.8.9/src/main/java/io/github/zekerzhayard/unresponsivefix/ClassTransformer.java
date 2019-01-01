@@ -22,29 +22,22 @@ public class ClassTransformer implements IClassTransformer {
                     if (name.equals("onLoadCosmetics") && desc.equals("()V")) {
                         System.out.println("Found the method: " + name + desc);
                         return new MethodVisitor(Opcodes.ASM5, methodVisitor) {
-                            private boolean isFirst = true;
-
                             @Override
-                            public void visitVarInsn(int opcode, int var) {
-                                if (this.mv != null) {
-                                    if (this.isFirst && opcode == Opcodes.ALOAD && var == 0) {
-                                        this.isFirst = false;
-                                        Label label = new Label();
-                                        this.mv.visitFieldInsn(Opcodes.GETSTATIC, "io/github/zekerzhayard/unresponsivefix/LoadingThread", "isReady", "Z");
-                                        this.mv.visitJumpInsn(Opcodes.IFEQ, label);
-                                        this.mv.visitInsn(Opcodes.ICONST_0);
-                                        this.mv.visitFieldInsn(Opcodes.PUTSTATIC, "io/github/zekerzhayard/unresponsivefix/LoadingThread", "isReady", "Z");
-                                        this.mv.visitTypeInsn(Opcodes.NEW, "io/github/zekerzhayard/unresponsivefix/LoadingThread");
-                                        this.mv.visitInsn(Opcodes.DUP);
-                                        this.mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "io/github/zekerzhayard/unresponsivefix/LoadingThread", "<init>", "()V", false);
-                                        this.mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "io/github/zekerzhayard/unresponsivefix/LoadingThread", "start", "()V", false);
-                                        this.mv.visitInsn(Opcodes.RETURN);
-                                        this.mv.visitLabel(label);
-                                        this.mv.visitInsn(Opcodes.ICONST_1);
-                                        this.mv.visitFieldInsn(Opcodes.PUTSTATIC, "io/github/zekerzhayard/unresponsivefix/LoadingThread", "isReady", "Z");
-                                    }
-                                    this.mv.visitVarInsn(opcode, var);
-                                }
+                            public void visitCode() {
+                                super.visitCode();
+                                Label label = new Label();
+                                this.mv.visitFieldInsn(Opcodes.GETSTATIC, "io/github/zekerzhayard/unresponsivefix/LoadingThread", "isReady", "Z");
+                                this.mv.visitJumpInsn(Opcodes.IFEQ, label);
+                                this.mv.visitInsn(Opcodes.ICONST_0);
+                                this.mv.visitFieldInsn(Opcodes.PUTSTATIC, "io/github/zekerzhayard/unresponsivefix/LoadingThread", "isReady", "Z");
+                                this.mv.visitTypeInsn(Opcodes.NEW, "io/github/zekerzhayard/unresponsivefix/LoadingThread");
+                                this.mv.visitInsn(Opcodes.DUP);
+                                this.mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "io/github/zekerzhayard/unresponsivefix/LoadingThread", "<init>", "()V", false);
+                                this.mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "io/github/zekerzhayard/unresponsivefix/LoadingThread", "start", "()V", false);
+                                this.mv.visitInsn(Opcodes.RETURN);
+                                this.mv.visitLabel(label);
+                                this.mv.visitInsn(Opcodes.ICONST_1);
+                                this.mv.visitFieldInsn(Opcodes.PUTSTATIC, "io/github/zekerzhayard/unresponsivefix/LoadingThread", "isReady", "Z");
                             }
                         };
                     }
