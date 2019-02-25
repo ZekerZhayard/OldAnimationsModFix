@@ -7,8 +7,6 @@ import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 @IFMLLoadingPlugin.MCVersion(value = "1.8.9")
 @IFMLLoadingPlugin.SortingIndex(value = 500)
 public class FMLLoadingPlugin implements IFMLLoadingPlugin {
-    public static boolean isDev = false;
-
     @Override()
     public String[] getASMTransformerClass() {
         return new String[] { (ClassTransformer.class.getName()) };
@@ -26,7 +24,7 @@ public class FMLLoadingPlugin implements IFMLLoadingPlugin {
 
     @Override()
     public void injectData(Map<String, Object> data) {
-        FMLLoadingPlugin.isDev = !(boolean) data.get("runtimeDeobfuscationEnabled");
+
     }
 
     @Override()
