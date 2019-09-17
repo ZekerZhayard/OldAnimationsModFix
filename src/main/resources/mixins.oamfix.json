@@ -1,0 +1,21 @@
+{
+  "compatibilityLevel": "JAVA_7",
+  "package": "io.github.zekerzhayard.oamfix.asm.mixins",
+  "client": [
+    "client.entity.MixinEntityPlayerSP",
+    "client.gui.inventory.MixinGuiContainer",
+    "client.model.MixinModelBiped",
+    "client.model.MixinModelPlayer",
+    "client.renderer.MixinInventoryEffectRenderer",
+    "client.renderer.MixinItemRenderer",
+    "client.renderer.entity.MixinRenderEntityItem",
+    "client.renderer.entity.MixinRendererLivingEntity",
+    "client.renderer.entity.layers.MixinLayerHeldItem",
+    "oldanimations.cosmetic.MixinLoadCosmeticData"
+  ],
+  "refmap": "mixins.oamfix.refmap.json",
+  "plugin": "io.github.zekerzhayard.oamfix.asm.MixinConfigPlugin",
+  "injectors": {
+    "maxShiftBy": 2
+  }
+}

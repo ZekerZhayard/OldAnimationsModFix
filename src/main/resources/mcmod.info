@@ -1,0 +1,16 @@
+[
+{
+  "modid": "oldanimationsmodfix",
+  "name": "OldAnimationsModFix",
+  "description": "Fix some bugs when initializing OldAniamtionsMod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/ZekerZhayard/OldAnimationsModFix/",
+  "updateUrl": "https://github.com/ZekerZhayard/OldAnimationsModFix/releases",
+  "authorList": ["ZekerZhayard"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
