@@ -89,7 +89,7 @@ jar {
         zipTree(it)
     }
     manifest.attributes([
-        'TweakClass': 'io.github.zekerzhayard.oamfix.Tweaker',
+        'TweakClass': 'io.github.zekerzhayard.oamfix.asm.Tweaker',
         'TweakOrder': '1'
     ])
 }

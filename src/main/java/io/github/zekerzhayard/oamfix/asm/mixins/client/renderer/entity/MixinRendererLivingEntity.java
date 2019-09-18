@@ -39,7 +39,7 @@ public abstract class MixinRendererLivingEntity {
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/entity/RendererLivingEntity;renderOffsetLivingLabel(Lnet/minecraft/entity/Entity;DDDLjava/lang/String;FD)V"
         ),
-        index = 1
+        index = 2
     )
     private double modifyArg$renderName$0(Entity entityIn, double x, double y, double z, String str, float p_177069_9_, double p_177069_10_) {
         return y + CosmeticManager.getNameTagHeight(entityIn);
