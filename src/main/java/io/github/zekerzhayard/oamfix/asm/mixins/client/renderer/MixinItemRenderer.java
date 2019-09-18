@@ -12,14 +12,13 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemCarrotOnAStick;
 import net.minecraft.item.ItemFishingRod;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
+import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
@@ -102,10 +101,26 @@ public abstract class MixinItemRenderer implements IMixinItemRenderer {
         at = @At(
             value = "INVOKE",
             shift = At.Shift.AFTER,
-            target = "Lnet/minecraft/client/renderer/ItemRenderer;doBlockTransformations()V"
+            target = "Lnet/minecraft/client/renderer/ItemRenderer;transformFirstPersonItem(FF)V",
+            ordinal = 1
         )
     )
     private void inject$renderItemInFirstPerson$2(CallbackInfo ci) {
+        if (Settings.oldeat) {
+            GlStateManager.scale(0.8F, 1.0F, 1.0F);
+            GL11.glTranslatef(-0.2F, -0.1F, 0.0F);
+        }
+    }
+
+    @Inject(
+        method = "Lnet/minecraft/client/renderer/ItemRenderer;renderItemInFirstPerson(F)V",
+        at = @At(
+            value = "INVOKE",
+            shift = At.Shift.AFTER,
+            target = "Lnet/minecraft/client/renderer/ItemRenderer;doBlockTransformations()V"
+        )
+    )
+    private void inject$renderItemInFirstPerson$3(CallbackInfo ci) {
         if (Settings.oldblockhit) {
             GlStateManager.scale(0.83F, 0.88F, 0.85F);
             GlStateManager.translate(-0.3F, 0.1F, 0.0F);

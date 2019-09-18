@@ -23,7 +23,7 @@ public abstract class MixinLayerHeldItem {
     )
     private void redirect$doRenderLayer$0(ModelBiped modelBiped, float $scale, EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         if (entitylivingbaseIn instanceof EntityPlayer && Settings.oldsword && ((EntityPlayer) entitylivingbaseIn).isBlocking()) {
-            modelBiped.postRenderArm(0.325F);
+            modelBiped.postRenderArm(0.0325F);
             GlStateManager.scale(1.05F, 1.05F, 1.05F);
             if (entitylivingbaseIn.isSneaking()) {
                 GlStateManager.translate(-0.58F, 0.32F, -0.07F);
