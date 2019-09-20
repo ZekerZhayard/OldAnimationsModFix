@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Slice;
@@ -89,7 +90,7 @@ public abstract class MixinItemRenderer implements IMixinItemRenderer {
         ),
         locals = LocalCapture.CAPTURE_FAILSOFT
     )
-    private void inject$renderItemInFirstPerson$1(float partialTicks, CallbackInfo ci, float f, AbstractClientPlayer abstractclientplayer, float f1, float f2, float f3, EnumAction enumaction) {
+    private void inject$renderItemInFirstPerson$1(float partialTicks, CallbackInfo ci, float f, @Coerce AbstractClientPlayer player, float f1, float f2, float f3, EnumAction enumaction) {
         this.oam_swingProgress = 0.0F;
         if (Settings.oldblockhit) {
             this.oam_swingProgress = f1;

@@ -78,7 +78,7 @@ public abstract class MixinRenderEntityItem extends Render<EntityItem> {
     )
     private void inject$doRender$1(EntityItem entity, double x, double y, double z, float entityYaw, float partialTicks, CallbackInfo ci, ItemStack itemstack, boolean flag, IBakedModel ibakedmodel, int i, int j, float f3, float f4, float f5) {
         if (this.olditems) {
-            GlStateManager.translate(-0.05F * f3, 0.05F * f4, -0.1 * (double)f5);
+            GlStateManager.translate(-0.05F * f3, 0.05F * f4, -0.1 * (double) f5);
         }
     }
 
