@@ -3,6 +3,7 @@ package io.github.zekerzhayard.oamfix.asm;
 import java.io.File;
 import java.util.List;
 
+import net.minecraft.launchwrapper.IClassTransformer;
 import net.minecraft.launchwrapper.ITweaker;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
@@ -13,6 +14,7 @@ import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.spongepowered.asm.mixin.Mixins;
 
+@SuppressWarnings("unchecked")
 public class Tweaker implements ITweaker {
     private Logger logger = LogManager.getLogger("OAMFix");
 
@@ -23,6 +25,9 @@ public class Tweaker implements ITweaker {
 
     @Override
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
+        classLoader.addTransformerExclusion("io.github.zekerzhayard.oamfix.asm.");
+        ((List<String>) Launch.blackboard.get("TweakClasses")).add(DeobfTweaker.class.getName());
+
         MixinBootstrap.init();
         Mixins.addConfiguration("mixins.oamfix.json");
         MixinEnvironment.getCurrentEnvironment().setObfuscationContext("searge");
@@ -35,9 +40,8 @@ public class Tweaker implements ITweaker {
 
     @Override
     public String[] getLaunchArguments() {
-        List transformers;
         try {
-            transformers = (List) FieldUtils.readDeclaredField(Launch.classLoader, "transformers", true);
+            List<IClassTransformer> transformers = (List<IClassTransformer>) FieldUtils.readDeclaredField(Launch.classLoader, "transformers", true);
             boolean isDetected = false;
             for (int i = transformers.size() - 1; i >= 0; i--) {
                 if (transformers.get(i).getClass().getName().equals("$wrapper.com.spiderfrog.main.ClassTransformer")) {

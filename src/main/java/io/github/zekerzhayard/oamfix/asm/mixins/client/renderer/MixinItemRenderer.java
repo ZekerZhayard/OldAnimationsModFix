@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(ItemRenderer.class)
-public abstract class MixinItemRenderer implements IMixinItemRenderer {
+public abstract class MixinItemRenderer {
     @Final
     @Shadow
     private Minecraft mc;
@@ -162,7 +162,6 @@ public abstract class MixinItemRenderer implements IMixinItemRenderer {
         return this.oam_swingProgress;
     }
 
-    @Override
     public void updateEquippedItemOld() {
         this.prevEquippedProgress = this.equippedProgress;
         EntityPlayer entityplayer = this.mc.thePlayer;
@@ -198,7 +197,6 @@ public abstract class MixinItemRenderer implements IMixinItemRenderer {
         }
     }
 
-    @Override
     public void updateEquippedItemNew() {
         boolean temp = Settings.olditemupdate;
         Settings.olditemupdate = false;

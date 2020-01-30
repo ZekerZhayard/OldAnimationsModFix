@@ -11,10 +11,12 @@
     "client.renderer.entity.MixinRenderEntityItem",
     "client.renderer.entity.MixinRendererLivingEntity",
     "client.renderer.entity.layers.MixinLayerHeldItem",
-    "oldanimations.cosmetic.MixinLoadCosmeticData"
+    "directionhud.MixinDirectionHUD",
+    "oldanimations.MixinSettings",
+    "oldanimations.cosmetic.MixinLoadCosmeticData",
+    "togglesneak.MixinToggleSneakMod"
   ],
   "refmap": "mixins.oamfix.refmap.json",
-  "plugin": "io.github.zekerzhayard.oamfix.asm.MixinConfigPlugin",
   "injectors": {
     "maxShiftBy": 2
   }
