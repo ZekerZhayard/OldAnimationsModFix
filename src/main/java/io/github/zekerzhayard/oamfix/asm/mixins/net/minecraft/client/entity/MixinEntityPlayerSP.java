@@ -1,4 +1,4 @@
-package io.github.zekerzhayard.oamfix.asm.mixins.client.entity;
+package io.github.zekerzhayard.oamfix.asm.mixins.net.minecraft.client.entity;
 
 import com.mojang.authlib.GameProfile;
 import com.spiderfrog.oldanimations.utils.TranslateGameSettings;

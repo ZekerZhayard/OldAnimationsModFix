@@ -1,4 +1,4 @@
-package io.github.zekerzhayard.oamfix.asm.mixins.client.gui.inventory;
+package io.github.zekerzhayard.oamfix.asm.mixins.net.minecraft.client.gui.inventory;
 
 import com.spiderfrog.oldanimations.Settings;
 import net.minecraft.client.gui.inventory.GuiContainer;

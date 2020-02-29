@@ -1,4 +1,4 @@
-package io.github.zekerzhayard.oamfix.asm.mixins.client.model;
+package io.github.zekerzhayard.oamfix.asm.mixins.net.minecraft.client.model;
 
 import io.github.zekerzhayard.oamfix.asm.transformers.ModelPlayerTransformer;
 import net.minecraft.client.model.ModelPlayer;

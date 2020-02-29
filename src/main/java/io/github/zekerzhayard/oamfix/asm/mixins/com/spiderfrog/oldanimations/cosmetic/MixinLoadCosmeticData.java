@@ -1,4 +1,4 @@
-package io.github.zekerzhayard.oamfix.asm.mixins.oldanimations.cosmetic;
+package io.github.zekerzhayard.oamfix.asm.mixins.com.spiderfrog.oldanimations.cosmetic;
 
 import com.spiderfrog.oldanimations.cosmetic.LoadCosmeticData;
 import org.spongepowered.asm.mixin.Mixin;

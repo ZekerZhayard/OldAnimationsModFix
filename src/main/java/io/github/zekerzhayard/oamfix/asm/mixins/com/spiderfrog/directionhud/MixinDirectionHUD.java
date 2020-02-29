@@ -1,4 +1,4 @@
-package io.github.zekerzhayard.oamfix.asm.mixins.directionhud;
+package io.github.zekerzhayard.oamfix.asm.mixins.com.spiderfrog.directionhud;
 
 import com.spiderfrog.directionhud.DirectionHUD;
 import org.spongepowered.asm.mixin.Mixin;

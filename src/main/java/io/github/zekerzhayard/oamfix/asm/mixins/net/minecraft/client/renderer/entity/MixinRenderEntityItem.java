@@ -1,4 +1,4 @@
-package io.github.zekerzhayard.oamfix.asm.mixins.client.renderer.entity;
+package io.github.zekerzhayard.oamfix.asm.mixins.net.minecraft.client.renderer.entity;
 
 import com.spiderfrog.oldanimations.Settings;
 import net.minecraft.client.renderer.GlStateManager;

@@ -1,4 +1,4 @@
-package io.github.zekerzhayard.oamfix.asm.mixins.togglesneak;
+package io.github.zekerzhayard.oamfix.asm.mixins.com.spiderfrog.togglesneak;
 
 import com.spiderfrog.togglesneak.ToggleSneakMod;
 import org.spongepowered.asm.mixin.Mixin;

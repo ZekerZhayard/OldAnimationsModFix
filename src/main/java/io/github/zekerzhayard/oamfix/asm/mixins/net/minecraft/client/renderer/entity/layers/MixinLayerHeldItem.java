@@ -1,4 +1,4 @@
-package io.github.zekerzhayard.oamfix.asm.mixins.client.renderer.entity.layers;
+package io.github.zekerzhayard.oamfix.asm.mixins.net.minecraft.client.renderer.entity.layers;
 
 import com.spiderfrog.oldanimations.Settings;
 import net.minecraft.client.model.ModelBiped;

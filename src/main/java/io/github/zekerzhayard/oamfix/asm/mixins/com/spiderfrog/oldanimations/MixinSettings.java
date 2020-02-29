@@ -1,4 +1,4 @@
-package io.github.zekerzhayard.oamfix.asm.mixins.oldanimations;
+package io.github.zekerzhayard.oamfix.asm.mixins.com.spiderfrog.oldanimations;
 
 import com.spiderfrog.oldanimations.Settings;
 import org.spongepowered.asm.mixin.Mixin;

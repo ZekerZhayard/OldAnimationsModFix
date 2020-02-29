@@ -1,4 +1,4 @@
-package io.github.zekerzhayard.oamfix.asm.mixins.client.model;
+package io.github.zekerzhayard.oamfix.asm.mixins.net.minecraft.client.model;
 
 import com.spiderfrog.oldanimations.Settings;
 import net.minecraft.client.model.ModelBiped;

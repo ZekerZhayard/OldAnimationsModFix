@@ -1,4 +1,4 @@
-package io.github.zekerzhayard.oamfix.asm.mixins.client.renderer;
+package io.github.zekerzhayard.oamfix.asm.mixins.net.minecraft.client.renderer;
 
 import com.spiderfrog.oldanimations.Settings;
 import net.minecraft.client.Minecraft;

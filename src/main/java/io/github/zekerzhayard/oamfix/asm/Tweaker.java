@@ -1,12 +1,14 @@
 package io.github.zekerzhayard.oamfix.asm;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import net.minecraft.launchwrapper.IClassTransformer;
 import net.minecraft.launchwrapper.ITweaker;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
+import net.minecraftforge.fml.relauncher.CoreModManager;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,6 +28,11 @@ public class Tweaker implements ITweaker {
     @Override
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
         classLoader.addTransformerExclusion("io.github.zekerzhayard.oamfix.asm.");
+        try {
+            CoreModManager.getIgnoredMods().remove(new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getName());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         ((List<String>) Launch.blackboard.get("TweakClasses")).add(DeobfTweaker.class.getName());
 
         MixinBootstrap.init();
